@@ -1,0 +1,174 @@
+### Topic 2
+
+//Basic Tasks
+1. Insert one student with name, age, course. 
+
+test> use collegedb
+switched to db collegedb
+
+ db.createCollection("students")
+
+ db.students.insertOne({name : "rohith", age : 21, course : "AI and ML"})
+
+2. Insert one employee with name, department, salary. 
+
+ db.createCollection("employee")
+
+ db.employee.insertOne({name : "mohith", dept : "AI and ML", salary : 80000})
+
+3. Insert one book with title, author, price. 
+
+ db.createCollection("Books")
+
+ db.Books.insertOne({title : "abc", author : "xyz", price : 800})
+
+4. Insert one movie with name, rating, genre. 
+
+ db.createCollection("movies")
+
+ db.movies.insertOne({name : "abc", rating : 8.9, genre : "horror"})
+
+5. Insert one department with name and location. 
+
+ db.createCollection("departments")
+
+ db.departments.insertOne({name : "AI and ML", location : "admin block"})
+
+
+ ### Topic 3
+
+//Basic tasks
+
+1. Show all students
+
+	db.students.find()
+
+2. Show all employees
+
+	db.employees.find()
+
+3. Show all products
+
+	db.products.find()
+
+4. Find one student by name
+
+	db.students.findOne({name : "rohith"})
+
+5. Find one employee by department
+
+	db.employees.findOne({department : "AI and ML"})
+
+
+### Topic 4
+
+// Basic tasks
+
+1. Find students whose age is greater than 20. 
+
+	 db.students.find({age : {$gt : 20}})
+
+2. Find employees whose salary is less than 30000. 
+
+	db.employees.insertMany([
+					{name : "abc", salary : 29172, department : "cleaning" }, 
+					{name : "pqr", salary :27872, department : " security" }
+			       ])
+	
+	db.employees.find({salary : {$lt : 30000 }})
+
+3. Find products whose stock is greater than 0. 
+
+	db.products.find({stock : {$gt : 0}})
+
+4. Find interns whose age is greater than or equal to 22. 
+
+	db.interns.find({age : {$gte : 22}})
+
+5. Find books whose price is less than or equal to 500.
+
+db.Books.insertMany([
+			{title : "atomic habits", author : "abc", price :399 },
+			{title : "wimpy kid", author : "xyz", price :499 }
+		   ])
+
+db.Books.find({price : {$lte : 500}})
+
+
+### Topic 5
+
+// Basic tasks
+
+1. Show only name field from students. 
+
+	db.students.find({},{name: 1, _id : 0})
+
+2. Show only name and department from employees. 
+
+	db.employees.find({},{name : 1, department : 1, _id : 0})
+
+3. Hide _id from products output. 
+
+	db.products.find({},{_id : 0})
+
+4. Show only title and price from books. 
+
+	db.Books.find({},{title : 1, price : 1, _id : 0})
+
+5. Show only name and age from interns.
+
+	db.employees.updateMany(
+				{ name: "abc" }, { $set: { age: 21 } }		
+			       );
+
+	db.employees.updateMany(
+				{ name: "pqr" }, { $set: { age: 22 } }
+			       );
+
+	db.employees.updateMany(
+				{ name: "xyz" }, { $set: { age: 23 } }
+			       );
+
+	db.employees.updateMany(
+				{ name: "efg" }, { $set: { age: 22 } }
+			       );
+
+	db.employees.updateMany(
+				{ name: "uvw" }, { $set: { age: 21 } }
+			       );
+
+
+	db.employees.find({},{name : 1, age : 1, _id : 0})
+
+### Topic 6
+
+// Basic tasks
+
+1. Update one student's age. 
+
+	db.students.updateOne({name : "yeshwanth"},{$set : {age : 20}})
+
+2. Update one employee's department. 
+
+	db.employees.updateOne({name : "abc"},{$set : {department : "Design"}})
+
+3. Update one product's price. 
+
+	db.products.updateOne({product_name : "royal enfield classic 350"},{$set : {price : 280000}})
+
+4. Update one task's status. 
+
+	
+	db.tasks.updateOne({title : "MongoDB_tasks"},{$set : {status : "completed"}})
+
+
+5. Update one intern's email.
+
+	db.interns.updateMany({name : "abc"},{$set : {email : "abc@gmail.com"}});
+	db.interns.updateMany({name : "rst"},{$set : {email : "rst@gmail.com"}});
+	db.interns.updateMany({name : "pqr"},{$set : {email : "pqr@gmail.com"}});
+	db.interns.updateMany({name : "uvw"},{$set : {email : "uvw@gmail.com"}});
+	db.interns.updateMany({name : "xyz"},{$set : {email : "xyz@gmail.com"}});
+	
+
+	db.interns.updateOne({name : "abc"},{$set : {email : "cba@gmail.com"}})
