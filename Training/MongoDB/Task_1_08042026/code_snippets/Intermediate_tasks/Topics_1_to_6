@@ -196,4 +196,60 @@ db.products.updateMany(
 
 	db.tasks.find().limit(2)
 
+### Topic 6
+
+1. Update all interns in QA department to isActive: true.
+
+	db.interns.insertOne({name : "ghi", age : 21, department : "QA", isActive : false })
+
+	db.interns.insertOne({name : "efg", age : 22, department : "QA", isActive : false })
+	
+	db.interns.updateMany({department : "QA"}, {$set : {isActive : true }});
+
+ 
+2. Update all products in Electronics category by changing stock value.
+
+	 db.products.insertMany([
+			{product_id : 1, product_name : "laptop", category : "electronics", stock : 2000},
+			{product_id : 2, product_name : "camera", category : "electronics", stock : 300},
+			{product_id : 3, product_name : "iphone", category : "electronics", stock : 250},
+			{product_id : 4, product_name : "royal enfield classic 350", category : "automobiles", stock : 100},
+			{product_id : 5, product_name : "astroxi10", category : "sports", stock : 867}
+			]) 
+
+	db.products.updateOne({product_name: "laptop"}, {$set : {stock : 3000 }})
+
+	db.products.updateOne({product_name: "camera"}, {$set : {stock : 300 }})
+
+	db.products.updateOne({product_name: "iphone"}, {$set : {stock : 200 }})
+
+
+3. Update all employees in HR by adding location field. 
+
+	db.employees.updateOne({name : "abc"}, {$set : {location : "Mysuru" }})
+
+	db.employees.updateOne({name : "pqr"}, {$set : {location : "Bangalore"}}) 
+
+ 	db.employees.updateOne({name : "xyz"}, {$set : {location : "Mangalore" }})
+
+	db.employees.updateOne({name : "efg"}, {$set : {location : "Dharwad" }})
+
+	db.employees.updateOne({name : "uvw"}, {$set : {location : "Mysuru" }})
+
+	db.employees.updateOne({name : "abc"}, {$set : {location : "Bidar" }})
+
+	db.employees.updateOne({name : "pqr"}, {$set : {location : "Bangalore" }})
+
+4. Update all tasks with status "Pending" to "In Progress". 
+
+	db.tasks.insertMany([
+				{title: "topic_6", priority : "high" , status: "pending"},	
+				{title: "topic_7", priority : "high" , status: "pending"},	
+			   ])
+
+	db.tasks.updateMany({status : "pending"}, {$set : {status : "In Progress"}})
+
+5. Update all students of course "Java" to course "Java Full Stack".
+
+	db.students.updateMany({course : "Java"}, {$set : {course : "Java Full Stack"}})
 
