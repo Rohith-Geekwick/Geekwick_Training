@@ -253,3 +253,77 @@ db.products.updateMany(
 
 	db.students.updateMany({course : "Java"}, {$set : {course : "Java Full Stack"}})
 
+
+### Topic 8
+
+1. Delete all interns with isActive: false. 
+
+	db.interns.deleteMany({isActive : false})
+
+2. Delete all tasks with status "Completed". 
+
+	db.tasks.deleteMany({status: "completed"})
+
+3. Delete all products whose stock is 0. 
+
+	db.products.insertMany([
+					{product_id : 7 ,product_name : "Jump rope", category : "sports", stock :200 , cost : 100 },
+					{product_id : 8 ,product_name : "skate board", category : "sports", stock :500 , cost :1000 },
+			      ])
+
+	db.products.updateOne({product_name : "Jump rope"}, {$set : {stock : 0}})
+	db.products.updateOne({product_name : "skate board"}, {$set : {stock : 0}})
+		
+	db.products.deleteMany({stock : 0})
+	
+4. Delete all students whose age is less than 18. 
+
+	db.students.insertMany([
+				{name : "mahesh", age :16 , course : "MERN"},
+				{name : "sujay", age : 17, course : "MERN"},	
+			      ])
+
+	db.students.deleteMany({age : {$lt : 18}})	
+
+5. Delete all employees in a temporary department.
+
+	db.departments.insertOne({name : "music", location : "adminblock", employees : ["abc","pqr","xyz"]})
+
+	db.departments.deleteOne({name : "music"}, {employees : ""})
+
+
+### Topic 9
+
+1. Create 5 interns with multiple skills each.
+
+	db.interns.insertMany([
+				{name : "prajwal", age : 21, department : "data analyst", isActive : true, email : "praj@gmail.com", skills : ["node.js","HTML"] },
+				{name : "vishnu", age : 22, department : "data analyst", isActive : false, email : "vish@gmail.com", skills : ["node.js","CSS"] },
+				{name : "darshan", age : 21, department : "data analyst", isActive : true, email : "darshan@gmail.com", skills : ["HTML","CSS"] }
+			     ])
+	
+
+2. Find interns who have either "React" or "MongoDB".
+
+	db.interns.find({$or:
+				[
+					{skills : "react"},
+					{skills : "mongodb"}
+				]
+		       })
+ 
+3. Add one skill to all QA interns.
+
+	
+	db.interns.updateMany(
+				{department : "QA"},	
+				{$push : {skill: "jango"}}
+			     )
+
+4. Remove one common skill from all students. 
+
+	
+
+5. Count how many interns contain "JavaScript" in skills.
+
+	db.interns.countDocuments({skill : "Javascript"})

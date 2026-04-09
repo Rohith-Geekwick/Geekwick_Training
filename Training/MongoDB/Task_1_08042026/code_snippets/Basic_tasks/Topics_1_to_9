@@ -172,3 +172,54 @@ db.Books.find({price : {$lte : 500}})
 	
 
 	db.interns.updateOne({name : "abc"},{$set : {email : "cba@gmail.com"}})
+
+	### Topic 8
+
+	1. Delete one student by name. 
+
+	db.students.deleteOne({name : "yeshwanth"})
+
+2. Delete one employee by email. 
+
+	db.employees.updateOne({name : "abc"}, {$set : {email : "abc@gmail.com"}})
+
+	db.employees.deleteOne({email : "abc@gmail.com"})
+
+3. Delete one product by category.
+
+	db.products.deleteOne({category:"electronics"}) 
+
+4. Delete one task by title. 
+
+	db.tasks.deleteOne({title: "topic_6"})
+
+5. Delete one book by author. 
+
+	db.Books.deleteOne({author : "abc"})
+
+
+### Topic 9
+
+1. Create a document with a skills array. 
+	
+	db.interns.updateMany({department : "data analyst"},{$set : {skills : ["Tableau", "PowerBI"]}})
+
+	db.interns.updateMany({department : "frontend developer"},{$set : {skills : ["HTML", "CSS", "java script"]}})
+	
+	
+2. Find interns who have "MongoDB" in their skills. 
+
+	db.interns.insertMany([
+				{name : "swaroop", age : 22, department : "data analyst", isActive : true, email : "swaroop@gmail.com", skills : ["node.js","mongodb"] },
+				{name : "shamanth", age : 23, department : "data analyst", isActive : true, email : "sham@gmail.com", skills : ["next.js","mongodb"] }
+			     ])
+
+	db.interns.find({skills : "mongodb" })
+	
+3. Add "Node.js" to a skills array. 
+
+	db.interns.updateOne({name : "swaroop"}, {$push : {skills : "node.js"}})
+
+4. Remove "HTML" from a skills array.
+
+	db.interns.updateOne({name : "rst"}, {$pull : {skills : "HTML"}}) 
