@@ -1,0 +1,98 @@
+Topic 3: Indexing
+
+5 Basic Tasks:
+
+	1. Create an index on email in employees. 
+
+	db.employees.createIndex({ email: 1 })
+
+	2. View all indexes created on employees. 
+
+	db.employees.createIndex({ email: 1 })
+
+	3. Create an index on department in interns. 
+
+	db.interns.createIndex({ department: 1 })
+
+	4. Create an index on status in tasks. 
+
+	db.tasks.createIndex({ status: 1 })
+
+	5. Check existing indexes in products. 
+
+	db.products.getIndexes()
+	
+
+5 Intermediate Tasks:
+
+	1. Create a unique index on employee email.
+
+	db.employees.createIndex({ email: 1 }, { unique: true })
+ 
+	2. Create a compound index on department and salary.
+
+	db.employees.getIndexes(); db.employees.createIndex({ department: 1, salary: -1 })
+ 
+	3. Create an index on projectId in tasks. 
+
+	db.tasks.createIndex({ projectId: 1 })
+
+	4. Create an index on isDeleted in tasks. 
+
+	db.tasks.createIndex({ isDeleted: 1 })
+
+	5. Explain which field should be indexed in interns if users often search by email. 
+
+	db.interns.createIndex({ email: 1 })
+
+5 Advanced Tasks:
+
+	1. Identify 3 fields that should be indexed in an intern management system and justify why. 
+
+	db.interns.createIndex({ email: 1 })
+	db.interns.createIndex({ department: 1 })
+	db.interns.createIndex({ isActive: 1 })
+
+	2. Create a compound index for tasks on status and priority. 
+
+	 db.tasks.createIndex({ status: 1, priority: 1 })
+
+	3. Design indexing strategy for employees collection where search happens by email
+
+use internDB;
+
+try {
+  db.employees.dropIndex("email_1");
+} catch (e) {}
+
+db.employees.updateMany(
+  { email: { $exists: false } },
+  [
+    {
+      $set: {
+        email: {
+          $concat: [
+            "user_",
+            { $toString: "$_id" },
+            "@gmail.com"
+          ]
+        }
+      }
+    }
+  ]
+);
+
+db.employees.createIndex({ email: 1 }, { unique: true });
+
+db.employees.getIndexes();
+
+	4. Compare when a single-field index is enough and when compound index is better. 
+
+	db.employees.createIndex({ department: 1 })                 
+	db.employees.createIndex({ department: 1, salary: -1 })     
+
+	5. Write a short note on why too many indexes can also be harmful.department, and joinedDate.
+
+	db.interns.getIndexes()
+	db.tasks.getIndexes()
+	db.employees.getIndexes() 
