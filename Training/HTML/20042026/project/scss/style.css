@@ -1,0 +1,42 @@
+body {
+  background: #f4f6f9;
+  font-family: Arial;
+}
+
+/* HEADER & FOOTER */
+header, footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* CARD DESIGN */
+.card-custom {
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.card-custom img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.card-custom h5 {
+  color: #2c3e50;
+  margin-top: 10px;
+}
+.card-custom p {
+  color: gray;
+}
+.card-custom button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.card-custom button:hover {
+  background: rgb(33.1380753138, 125.1882845188, 186.8619246862);
+}/*# sourceMappingURL=style.css.map */
