@@ -1,0 +1,329 @@
+### topic 2
+
+1. Insert 5 students at once using insertMany(). 
+
+db.students.insertMany([
+			{name:"syed farhan", age:21, course:"AI and ML"},
+			{name : "dhruva", age : 21,course : "Data Science"},
+			{name : "rahul", age : 21, course : "Design"},
+			{name : "aditya", age : 21, course : "CSE"}, 
+			{name : "yeshwanth", age : 21, course : "Electronics and Communication"}
+		      ])
+
+2. Insert 5 employees with different salaries and departments. 
+
+db.employees.insertMany([
+			{name : "abc", salary : 50000, department : "AI and ML"},
+			{name : "pqr", salary : 55000, department : "Design"},
+			{name : "xyz", salary : 60000, department : "Data Science"},
+			{name : "efg", salary : 65000, department : "CSE"},
+			{name : "uvw", salary : 70000, department : "Electronics and Communication"}
+			])
+
+3. Insert 5 products with category and stock. 
+
+ db.createCollection("products")
+
+ db.products.insertMany([
+			{product_id : 1, product_name : "laptop", category : "electronics", stock : 2000},
+			{product_id : 2, product_name : "camera", category : "electronics", stock : 300},
+			{product_id : 3, product_name : "iphone", category : "electronics", stock : 250},
+			{product_id : 4, product_name : "royal enfield classic 350", category : "automobiles", stock : 100},
+			{product_id : 5, product_name : "astroxi10", category : "sports", stock : 867}
+			])
+
+4.Insert 5 tasks with title, priority, status.
+
+ db.createCollection("tasks")
+
+
+ db.tasks.insertMany([
+			{title: "simple_calculator", priority : "low" , status: "completed"},
+			{title: "eCommerce", priority : "high" , status: "completed"},
+			{title: "microservices", priority : "low" , status: "completed"},
+			{title: "microservices_architecture", priority : "high" , status: "completed"},
+			{title: "MongoDB_tasks", priority : "high" , status: "pending"},
+		    ])
+
+
+
+5. Insert 5 interns with fields: name, age, department, isActive.
+
+db.createCollection("interns")
+
+db.interns.insertMany([
+			{name : "abc", age : 21, department : "data analyst", isActive : true },
+			{name : "rst", age : 22, department : "frontend developer", isActive : true},
+			{name : "pqr", age : 21, department : "data analyst", isActive : true},
+			{name : "uvw", age : 23, department : "frontend developer", isActive : false },
+			{name : "xyz", age : 21, department : "data analyst", isActive : false }
+		      ])
+
+### Topic 3
+
+//intermediate tasks
+
+1. Show only students whose course is "MERN". 
+
+	db.students.insertMany({name : "sanjan", age : 21, course : "MERN"},{name : "lithin", age : 21, course : "MERN"})
+
+	db.students.find({course : "MERN"})
+
+2. Find all employees in "HR". 
+
+	db.createCollection("HR")
+
+	db.HR.insertMany([
+				{HR_name : "abc", employees : ["rohith", "swaroop", "shamanth"]},
+				{HR_name : "rst", employees : ["darshan", "sharath", "vishnu"]},
+				{HR_name : "uvw", employees : ["wasiq", "chiranjith", "vikas"]},
+			])
+	
+	db.HR.findOne({HR_name : "abc"})
+
+3. Find all products in category "Electronics". 
+	db.products.find({category : "electronics"})
+
+4. Find one task where status is "Pending". 
+
+	db.tasks.find({status : "pending"})
+
+5. Find all interns where isActive is true.
+
+	db.interns.find({isActive : true})
+
+### Topic 4
+
+1. Find employees with salary between 20000 and 50000. 
+
+	db.employees.find({$and : [
+					{salary : {$gt : 20000}},
+					{salary : {$lt : 50000}}
+				  ]
+			 })
+2. Find students whose course is not "Java". 
+
+	db.students.find({$nor : 
+				[
+					{ course : "Java"}
+				]
+			})
+
+3. Find products whose category is either "Electronics" or "Furniture". 
+
+	db.products.insertOne({product_id : 6, product_name : "rocking chair", category : "furniture", stock :159 })
+
+	db.products.find({$or : 
+				[
+					{category : "electronics"},
+					{category : "furniture"}	
+				]
+			})
+
+4.   Find interns whose department is in ["HR", "QA"].
+
+
+db.interns.insertMany([
+			{name : "abc", age : 22, department : "HR", isActive : true },
+			{name : "xyz", age : 23, department : "QA", isActive : false }
+		      ])
+
+db.interns.find({$or:
+			[
+				{department : "HR"},
+				{department : "QA"}
+			]
+		})
+
+5. Find tasks whose status is not "Completed".
+
+db.tasks.find({$nor: 
+			[
+				{status : "completed"}
+			]		
+	     })
+
+
+### Topic 5
+
+1. Sort students by age ascending. 
+
+	db.students.aggregate([
+				{$sort : {age : 1}}
+			     ])
+2. Sort employees by salary descending. 
+
+	db.employees.aggregate([
+				{$sort : {salary : -1}}
+			      ])
+
+3. Show top 3 expensive products. 
+
+db.products.updateMany(
+			{product_id : 1},
+			{$set : {cost:70000}}
+	);
+
+db.products.updateMany(
+			{product_id : 2},
+			{$set : {cost:30000}}
+	);
+
+db.products.updateMany(
+			{product_id : 3},
+			{$set : {cost:150000}}
+	);
+
+db.products.updateMany(
+			{product_id : 4},
+			{$set : {cost:300000}}
+	);
+
+db.products.updateMany(
+			{product_id : 5},
+			{$set : {cost:2500}}
+	);
+
+db.products.updateMany(
+			{product_id : 6},
+			{$set : {cost:15000}}
+	);
+
+
+	db.products.find().sort({cost : -1}).limit(3)
+
+4. Show first 2 tasks from tasks collection. 
+
+	db.tasks.find().limit(2)
+
+### Topic 6
+
+1. Update all interns in QA department to isActive: true.
+
+	db.interns.insertOne({name : "ghi", age : 21, department : "QA", isActive : false })
+
+	db.interns.insertOne({name : "efg", age : 22, department : "QA", isActive : false })
+	
+	db.interns.updateMany({department : "QA"}, {$set : {isActive : true }});
+
+ 
+2. Update all products in Electronics category by changing stock value.
+
+	 db.products.insertMany([
+			{product_id : 1, product_name : "laptop", category : "electronics", stock : 2000},
+			{product_id : 2, product_name : "camera", category : "electronics", stock : 300},
+			{product_id : 3, product_name : "iphone", category : "electronics", stock : 250},
+			{product_id : 4, product_name : "royal enfield classic 350", category : "automobiles", stock : 100},
+			{product_id : 5, product_name : "astroxi10", category : "sports", stock : 867}
+			]) 
+
+	db.products.updateOne({product_name: "laptop"}, {$set : {stock : 3000 }})
+
+	db.products.updateOne({product_name: "camera"}, {$set : {stock : 300 }})
+
+	db.products.updateOne({product_name: "iphone"}, {$set : {stock : 200 }})
+
+
+3. Update all employees in HR by adding location field. 
+
+	db.employees.updateOne({name : "abc"}, {$set : {location : "Mysuru" }})
+
+	db.employees.updateOne({name : "pqr"}, {$set : {location : "Bangalore"}}) 
+
+ 	db.employees.updateOne({name : "xyz"}, {$set : {location : "Mangalore" }})
+
+	db.employees.updateOne({name : "efg"}, {$set : {location : "Dharwad" }})
+
+	db.employees.updateOne({name : "uvw"}, {$set : {location : "Mysuru" }})
+
+	db.employees.updateOne({name : "abc"}, {$set : {location : "Bidar" }})
+
+	db.employees.updateOne({name : "pqr"}, {$set : {location : "Bangalore" }})
+
+4. Update all tasks with status "Pending" to "In Progress". 
+
+	db.tasks.insertMany([
+				{title: "topic_6", priority : "high" , status: "pending"},	
+				{title: "topic_7", priority : "high" , status: "pending"},	
+			   ])
+
+	db.tasks.updateMany({status : "pending"}, {$set : {status : "In Progress"}})
+
+5. Update all students of course "Java" to course "Java Full Stack".
+
+	db.students.updateMany({course : "Java"}, {$set : {course : "Java Full Stack"}})
+
+
+### Topic 8
+
+1. Delete all interns with isActive: false. 
+
+	db.interns.deleteMany({isActive : false})
+
+2. Delete all tasks with status "Completed". 
+
+	db.tasks.deleteMany({status: "completed"})
+
+3. Delete all products whose stock is 0. 
+
+	db.products.insertMany([
+					{product_id : 7 ,product_name : "Jump rope", category : "sports", stock :200 , cost : 100 },
+					{product_id : 8 ,product_name : "skate board", category : "sports", stock :500 , cost :1000 },
+			      ])
+
+	db.products.updateOne({product_name : "Jump rope"}, {$set : {stock : 0}})
+	db.products.updateOne({product_name : "skate board"}, {$set : {stock : 0}})
+		
+	db.products.deleteMany({stock : 0})
+	
+4. Delete all students whose age is less than 18. 
+
+	db.students.insertMany([
+				{name : "mahesh", age :16 , course : "MERN"},
+				{name : "sujay", age : 17, course : "MERN"},	
+			      ])
+
+	db.students.deleteMany({age : {$lt : 18}})	
+
+5. Delete all employees in a temporary department.
+
+	db.departments.insertOne({name : "music", location : "adminblock", employees : ["abc","pqr","xyz"]})
+
+	db.departments.deleteOne({name : "music"}, {employees : ""})
+
+
+### Topic 9
+
+1. Create 5 interns with multiple skills each.
+
+	db.interns.insertMany([
+				{name : "prajwal", age : 21, department : "data analyst", isActive : true, email : "praj@gmail.com", skills : ["node.js","HTML"] },
+				{name : "vishnu", age : 22, department : "data analyst", isActive : false, email : "vish@gmail.com", skills : ["node.js","CSS"] },
+				{name : "darshan", age : 21, department : "data analyst", isActive : true, email : "darshan@gmail.com", skills : ["HTML","CSS"] }
+			     ])
+	
+
+2. Find interns who have either "React" or "MongoDB".
+
+	db.interns.find({$or:
+				[
+					{skills : "react"},
+					{skills : "mongodb"}
+				]
+		       })
+ 
+3. Add one skill to all QA interns.
+
+	
+	db.interns.updateMany(
+				{department : "QA"},	
+				{$push : {skill: "jango"}}
+			     )
+
+4. Remove one common skill from all students. 
+
+	
+
+5. Count how many interns contain "JavaScript" in skills.
+
+	db.interns.countDocuments({skill : "Javascript"})

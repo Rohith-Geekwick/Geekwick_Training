@@ -1,10 +1,12 @@
-import { courses } from "../data";
+import { connectDB } from "@/lib/mongodb";
 
-// GET single course
+// GET one course
 export async function GET(req, { params }) {
   const { id } = await params;
 
-  const course = courses.find((c) => c.id === id);
+  const db = await connectDB();
+
+  const course = await db.collection("courses").findOne({ id });
 
   if (!course) {
     return Response.json({ message: "Not found" }, { status: 404 });
@@ -17,13 +19,9 @@ export async function GET(req, { params }) {
 export async function DELETE(req, { params }) {
   const { id } = await params;
 
-  const index = courses.findIndex((c) => c.id === id);
+  const db = await connectDB();
 
-  if (index === -1) {
-    return Response.json({ message: "Not found" }, { status: 404 });
-  }
+  await db.collection("courses").deleteOne({ id });
 
-  courses.splice(index, 1);
-
-  return Response.json({ message: "Deleted", courses });
+  return Response.json({ message: "Deleted" });
 }
