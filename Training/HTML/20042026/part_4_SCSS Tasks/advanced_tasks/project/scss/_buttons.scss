@@ -1,0 +1,12 @@
+@mixin button-style($bg) {
+    background: $bg;
+    padding: $padding;
+    border-radius: $radius;
+    border: none;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        background: darken($bg, 10%);
+    }
+}

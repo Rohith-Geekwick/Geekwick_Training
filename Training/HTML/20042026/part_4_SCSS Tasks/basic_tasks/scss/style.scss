@@ -1,0 +1,17 @@
+// VARIABLES
+$primary-color: blue;
+$text-color: white;
+$padding: 10px;
+
+// BASIC STYLING
+body {
+    text-align: center;
+    font-family: Arial;
+}
+
+button {
+    background: $primary-color;
+    color: $text-color;
+    padding: $padding;
+    border: none;
+}
